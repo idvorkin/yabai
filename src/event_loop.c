@@ -414,6 +414,7 @@ static EVENT_HANDLER(APPLICATION_FRONT_SWITCHED)
         }
 
         window_manager_add_lost_focused_event(&g_window_manager, application_focused_window_id);
+        window_manager_adopt_missed_window(&g_window_manager, application_focused_window_id);
         return;
     }
 
@@ -641,6 +642,7 @@ static EVENT_HANDLER(WINDOW_FOCUSED)
     struct window *window = window_manager_find_window(&g_window_manager, window_id);
     if (!window) {
         window_manager_add_lost_focused_event(&g_window_manager, window_id);
+        window_manager_adopt_missed_window(&g_window_manager, window_id);
         return;
     }
 
